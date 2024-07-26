@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Results</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 20px;
+        }
+        .card {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .card h3 {
+            color: #333;
+        }
+        .score {
+            color: #555;
+            font-size: 16px;
+            margin-top: 5px;
+        }
+        .review {
+            font-size: 14px;
+            color: #666;
+            margin-top: 10px;
+        }
+        a {
+            text-decoration: none;
+            color: white;
+            background-color: #007BFF;
+            padding: 10px 20px;
+            border-radius: 5px;
+            display: inline-block;
+            margin-top: 20px;
+        }
+        a:hover {
+            background-color: #0056b3;
+        }
+        .user-review {
+            background: #e8e8e8;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            font-size: 16px;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <h1>Recommendations</h1>
+    <div class="user-review">
+        <strong>Your Review:</strong> "{{ user_review }}"
+    </div>
+    {% if hotels %}
+        {% for hotel, data in hotels %}
+            <div class="card">
+                <h3>{{ hotel|replace('_', ' ')|title }}</h3>
+                <p class="score">Similarity score: {{ data[0] }}</p>
+                <p class="review">"{{ data[1] }}"</p>
+            </div>
+        {% endfor %}
+    {% else %}
+        <p>No recommendations available.</p>
+    {% endif %}
+    <a href="/">Try another review</a>
+</body>
+</html>
